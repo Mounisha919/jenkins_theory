@@ -117,3 +117,6 @@ pipeline {
 > 💡 Replace `'linux'` with whatever label you gave to your slave during configuration.
 
 ---
+
+## ✅ Pipeline stage view plugin-- to view stages
+
