@@ -1,8 +1,3 @@
-Here’s a clear and well-structured `README.md` content that explains how to set up SSH-based **Master-Slave (Agent)** connection in Jenkins:
-
----
-
-````markdown
 # 🔗 Jenkins Master-Slave (Agent) SSH Connection Setup
 
 This guide explains how to set up a Jenkins **master-slave (agent)** connection over SSH using key-based authentication.
@@ -24,7 +19,7 @@ On the **master node terminal**:
 
 ```bash
 ssh-keygen -t rsa -b 2048 -f ~/.ssh/id_rsa
-````
+```
 
 * This generates:
 
@@ -100,7 +95,25 @@ cat ~/.ssh/id_rsa.pub | ssh <slave-username>@<slave-ip> 'mkdir -p ~/.ssh && cat 
 
 ---
 
+## ✅ Sample Declarative Pipeline Using Agent Label
+
+Below is a minimal pipeline that runs on the slave with label `linux` and creates a folder on that slave machine:
+
+```groovy
+pipeline {
+    agent { label 'linux' }
+
+    stages {
+        stage('Create Folder') {
+            steps {
+                sh 'mkdir -p /tmp/jenkins-example-folder'
+                echo 'Folder created on the slave!'
+            }
+        }
+    }
+}
 ```
 
-Let me know if you want a diagram or want this in PDF format too.
-```
+> 💡 Replace `'linux'` with whatever label you gave to your slave during configuration.
+
+---
